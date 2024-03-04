@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script type="application/json">
+      {
+        "prev": "https://yahoo.com",
+        "next": "https://google.com"
+      }
+    </script>
+    <script>
+      console.log(document.referrer, document.location.href);
+    </script>
+    <style>
+      #webring {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      #webring div:first-child {
+        text-align: left;
+      }
+
+      #webring div:last-child {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="webring">
+      <div>
+        <a target="_top" href="https://yahoo.com">Previous</a>
+      </div>
+      <div>
+        <a target="_top" href="https://google.com">Next</a>
+      </div>
+    </div>
+  </body>
+</html>
