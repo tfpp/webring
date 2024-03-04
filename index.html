@@ -39,6 +39,7 @@
 
     function getCircular(list, index, offset) {
       const i = mod(index + offset, list.length);
+      console.log(i);
       return list[i];
     }
 
@@ -53,12 +54,17 @@
       return clone;
     }
 
+    function getSelfIndex(list, host) {
+      return list.findIndex((value) => value.host === host);
+    }
+
     const referrer = new URL(document.referrer);
     const host = referrer.host;
-    const list = JSON.parse(document.getElementById("ring").innerText);
+    const ring = JSON.parse(document.getElementById("ring").innerText);
     const container = document.querySelector("#webring");
+    const i = getSelfIndex(ring, referrer.host);
 
-    container.appendChild(renderLink(getCircular(list, 0, -1)));
-    container.appendChild(renderLink(getCircular(list, 0,  1)));
+    container.appendChild(renderLink(getCircular(ring, i, -1)));
+    container.appendChild(renderLink(getCircular(ring, i,  1)));
   </script>
 </html>
