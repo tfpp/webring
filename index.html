@@ -1,13 +1,12 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <script type="application/json">
-      {
-        "prev": "https://yahoo.com",
-        "next": "https://google.com"
-      }
-    </script>
-    <script>
-      console.log(document.referrer, document.location.href);
+    <script id="ring" type="application/json">
+      [
+        {"title": "Yahoo", "host": "yahoo.com", "homepage": "https://yahoo.com/"},
+        {"title": "Localhost", "host": "localhost:8000", "homepage": "http://localhost:8000/"},
+        {"title": "Google", "host": "google.com", "homepage": "https://google.com/"}
+      ]
     </script>
     <style>
       #webring {
@@ -26,13 +25,40 @@
     </style>
   </head>
   <body>
-    <div id="webring">
+    <template id="webring-link">
       <div>
-        <a target="_top" href="https://yahoo.com">Previous</a>
+        <span><a id="webring-link-a" target="_top" href="#">Go</a></span>
       </div>
-      <div>
-        <a target="_top" href="https://google.com">Next</a>
-      </div>
-    </div>
+    </template>
+    <div id="webring" role="navigation"></div>
   </body>
+  <script>
+    function mod(x, y) {
+      return ((x % y) + y) % y;
+    }
+
+    function getCircular(list, index, offset) {
+      const i = mod(index + offset, list.length);
+      return list[i];
+    }
+
+    function renderLink(link) {
+      const template = document.getElementById("webring-link");
+      const clone = template.content.cloneNode(true);
+      
+      const el = clone.querySelector("a");
+      el.innerText = link.title;
+      el.href = link.homepage;
+
+      return clone;
+    }
+
+    const referrer = new URL(document.referrer);
+    const host = referrer.host;
+    const list = JSON.parse(document.getElementById("ring").innerText);
+    const container = document.querySelector("#webring");
+
+    container.appendChild(renderLink(getCircular(list, 0, -1)));
+    container.appendChild(renderLink(getCircular(list, 0,  1)));
+  </script>
 </html>
