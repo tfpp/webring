@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <script id="ring" type="application/json">
       [
         {"title": "Yahoo", "host": "yahoo.com", "homepage": "https://yahoo.com/"},
@@ -39,7 +40,7 @@
 
     function getCircular(list, index, offset) {
       const i = mod(index + offset, list.length);
-      console.log(i);
+
       return list[i];
     }
 
@@ -47,9 +48,9 @@
       const template = document.getElementById("webring-link");
       const clone = template.content.cloneNode(true);
       
-      const el = clone.querySelector("a");
-      el.innerText = link.title;
-      el.href = link.homepage;
+      const a = clone.querySelector("a");
+      a.innerText = link.title;
+      a.href = link.homepage;
 
       return clone;
     }
