@@ -1,0 +1,10 @@
+webring:
+  - title: Yahoo
+    host: yahoo.com
+    homepage: https://yahoo.com/
+  - title: Localhost
+    host: localhost:8000
+    homepage: http://localhost:8000/
+  - title: Google
+    host: google.com
+    homepage: https://google.com/

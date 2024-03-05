@@ -1,0 +1,13 @@
+#webring {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+}
+
+#webring div:first-child {
+  text-align: left;
+}
+
+#webring div:last-child {
+  text-align: right;
+}
