@@ -1,0 +1,7 @@
+---
+interface Props { homeLink?: boolean }
+const { homeLink = true } = Astro.props;
+---
+{homeLink
+  ? <a class="logo" href="/" aria-label="tfpp.pw — The Fake Place home">tfpp.pw</a>
+  : <span class="logo">tfpp.pw</span>}

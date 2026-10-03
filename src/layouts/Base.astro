@@ -1,0 +1,32 @@
+---
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  noindex?: boolean;
+  embed?: boolean;
+}
+const { title = 'The Fake Place — tfpp.pw', noindex = false, embed = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1C1C1C" />
+    <meta name="description" content="The Fake Place — a webring of personal blogs on .pw." />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="The Fake Place" />
+  </head>
+  <body class:list={{ embed }}>
+    <slot />
+  </body>
+</html>

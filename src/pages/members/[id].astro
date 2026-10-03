@@ -1,0 +1,27 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import Base from '../../layouts/Base.astro';
+import { members } from '../../data/ring';
+import { getNeighbors } from '../../lib/ring';
+
+export const getStaticPaths = (() =>
+  members.map((member) => ({
+    params: { id: member.id },
+    props: getNeighbors(members, member.id),
+  }))
+) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { current, previous, next } = Astro.props;
+---
+<Base title={`${current.domain} — The Fake Place`} noindex embed>
+  <main>
+    <nav class="ring-nav" aria-label={`The Fake Place webring navigation for ${current.domain}`}>
+      {previous && <a class="ring-neighbor" href={previous.url} target="_top"
+        aria-label={`Previous blog: ${previous.domain}`} rel="prev">← Previous</a>}
+      <a class="ring-home" href="/" target="_top" aria-label="tfpp.pw — The Fake Place member directory">tfpp.pw</a>
+      {next && <a class="ring-neighbor" href={next.url} target="_top"
+        aria-label={`Next blog: ${next.domain}`} rel="next">Next →</a>}
+    </nav>
+  </main>
+</Base>

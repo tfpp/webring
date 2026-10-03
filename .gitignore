@@ -1,5 +1,14 @@
-_site
-.sass-cache
-.jekyll-cache
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+# Legacy local Jekyll artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
 .jekyll-metadata
-vendor
+vendor/

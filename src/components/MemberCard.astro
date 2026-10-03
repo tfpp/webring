@@ -1,0 +1,19 @@
+---
+import type { Member } from '../lib/ring';
+interface Props { member: Member; index: number }
+const { member, index } = Astro.props;
+---
+<li>
+  <a class="card" href={member.url} target="_blank" rel="noopener noreferrer">
+    <div class="card-top">
+      <span class="monogram" aria-hidden="true">{member.domain.charAt(0)}.</span>
+      <span class="index" aria-hidden="true">{String(index + 1).padStart(3, '0')}</span>
+    </div>
+    <h3 class="domain">{member.domain}</h3>
+    <div class="visit">
+      <span>{member.url}</span>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </div>
+    <span class="sr-only"> (opens in a new tab)</span>
+  </a>
+</li>
